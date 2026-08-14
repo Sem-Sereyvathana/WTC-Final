@@ -1,0 +1,285 @@
+/* Shared layout: page wrapper, navbar, buttons, footer.
+   Used by every page via Layout.jsx, so update it once, everywhere updates. */
+
+* {
+  box-sizing: border-box;
+}
+
+.rs-page {
+  min-height: 100vh;
+  width: 100%;
+  overflow-x: hidden;
+  display: flex;
+  flex-direction: column;
+  background: radial-gradient(
+      ellipse at 70% 60%,
+      rgba(45, 130, 160, 0.25) 0%,
+      transparent 55%
+    ),
+    radial-gradient(
+      ellipse at 15% 15%,
+      rgba(124, 58, 237, 0.25) 0%,
+      transparent 45%
+    ),
+    #0a0a14;
+  color: #f5f5f7;
+  font-family: "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+}
+
+.rs-main {
+  flex: 1;
+}
+
+.rs-nav-link,
+.rs-btn {
+  text-decoration: none;
+}
+
+/* ---------- Navbar ---------- */
+
+.rs-navbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  padding: 18px clamp(20px, 4vw, 48px);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+  position: relative;
+}
+
+.rs-logo {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: clamp(18px, 2vw, 22px);
+  font-weight: 800;
+  letter-spacing: 0.5px;
+  white-space: nowrap;
+  text-decoration: none;
+  color: #f5f5f7;
+}
+
+.rs-logo-badge {
+  width: 34px;
+  height: 34px;
+  border-radius: 9px;
+  background: linear-gradient(135deg, #7c3aed, #4f46e5);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 16px;
+  flex-shrink: 0;
+}
+
+.rs-logo-accent {
+  color: #22d3ee;
+}
+
+.rs-nav-links {
+  display: flex;
+  gap: 8px;
+}
+
+.rs-nav-link {
+  background: transparent;
+  border: none;
+  color: #cbd5e1;
+  font-size: 15px;
+  font-weight: 600;
+  padding: 8px 16px;
+  border-radius: 8px;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+}
+
+.rs-nav-link:hover {
+  color: #fff;
+}
+
+.rs-nav-link-active {
+  background: rgba(124, 58, 237, 0.25);
+  color: #fff;
+}
+
+.rs-nav-actions {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+/* Hamburger menu button — hidden on desktop, shown once the nav
+   links collapse (see breakpoint below) */
+.rs-menu-toggle {
+  display: none;
+  flex-direction: column;
+  justify-content: center;
+  gap: 5px;
+  width: 34px;
+  height: 34px;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  padding: 0;
+}
+
+.rs-menu-toggle span {
+  display: block;
+  width: 100%;
+  height: 2px;
+  background: #f5f5f7;
+  border-radius: 2px;
+}
+
+/* ---------- Buttons ---------- */
+
+.rs-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  border: none;
+  border-radius: 10px;
+  font-weight: 700;
+  font-size: 14px;
+  padding: 10px 18px;
+  cursor: pointer;
+  transition: transform 0.15s ease, filter 0.15s ease;
+}
+
+.rs-btn:hover {
+  filter: brightness(1.08);
+  transform: translateY(-1px);
+}
+
+.rs-btn-primary {
+  background: linear-gradient(135deg, #8b5cf6, #6d28d9);
+  color: #fff;
+}
+
+.rs-btn-ghost {
+  background: #f5f5f7;
+  color: #0a0a14;
+}
+
+.rs-btn-dark {
+  background: rgba(255, 255, 255, 0.06);
+  color: #f5f5f7;
+  border: 1px solid rgba(255, 255, 255, 0.12);
+}
+
+.rs-btn-lg {
+  padding: 14px 26px;
+  font-size: 15px;
+  border-radius: 12px;
+}
+
+.rs-icon {
+  width: 16px;
+  height: 16px;
+}
+
+/* ---------- Footer ---------- */
+
+.rs-footer {
+  border-top: 1px solid rgba(255, 255, 255, 0.08);
+  padding: 48px clamp(20px, 4vw, 48px) 24px;
+  margin-top: 40px;
+}
+
+.rs-footer-top {
+  display: flex;
+  justify-content: space-between;
+  gap: 40px;
+  flex-wrap: wrap;
+  padding-bottom: 32px;
+}
+
+.rs-footer-brand {
+  max-width: 360px;
+}
+
+.rs-footer-tagline {
+  color: #a1a1aa;
+  font-size: 14px;
+  line-height: 1.6;
+  margin: 14px 0 0;
+}
+
+.rs-footer-links {
+  display: flex;
+  gap: 56px;
+  flex-wrap: wrap;
+}
+
+.rs-footer-col {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.rs-footer-col h4 {
+  font-size: 13px;
+  text-transform: uppercase;
+  letter-spacing: 0.6px;
+  color: #71717a;
+  margin: 0 0 4px;
+}
+
+.rs-footer-col a {
+  color: #cbd5e1;
+  text-decoration: none;
+  font-size: 14px;
+}
+
+.rs-footer-col a:hover {
+  color: #fff;
+}
+
+.rs-footer-bottom {
+  border-top: 1px solid rgba(255, 255, 255, 0.08);
+  padding-top: 20px;
+  font-size: 13px;
+  color: #71717a;
+  text-align: center;
+}
+
+/* ---------- Responsive ---------- */
+
+@media (max-width: 860px) {
+  .rs-nav-links {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    right: 0;
+    flex-direction: column;
+    align-items: stretch;
+    background: #0d0d16;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+    padding: 12px clamp(20px, 4vw, 48px) 16px;
+    gap: 4px;
+    display: none;
+  }
+
+  .rs-nav-links.rs-nav-links-open {
+    display: flex;
+  }
+
+  .rs-nav-link {
+    width: 100%;
+    padding: 12px 16px;
+  }
+
+  .rs-menu-toggle {
+    display: flex;
+  }
+
+  /* Sign Up / Login stay visible on tablet; hide them only on
+     very small screens so the bar doesn't get cramped */
+}
+
+@media (max-width: 480px) {
+  .rs-nav-actions .rs-btn-ghost {
+    display: none;
+  }
+}
