@@ -5,10 +5,13 @@
   box-sizing: border-box;
 }
 
+html {
+  overflow-x: hidden;
+}
+
 .rs-page {
   min-height: 100vh;
   width: 100%;
-  overflow-x: hidden;
   display: flex;
   flex-direction: column;
   background: radial-gradient(
@@ -44,7 +47,15 @@
   gap: 16px;
   padding: 18px clamp(20px, 4vw, 48px);
   border-bottom: 1px solid rgba(255, 255, 255, 0.08);
-  position: relative;
+  /* sticky NEEDS an offset (top/bottom/left/right) to know when to
+     kick in — without "top: 0" it silently behaves like static */
+  position: sticky;
+  top: 0;
+  z-index: 50;
+  /* solid-ish background + blur so page content scrolling underneath
+     doesn't show through the now-floating navbar */
+  background: rgba(10, 10, 20, 0.85);
+  backdrop-filter: blur(8px);
 }
 
 .rs-logo {

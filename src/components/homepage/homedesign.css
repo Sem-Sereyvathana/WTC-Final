@@ -1,21 +1,14 @@
-/* Home page (hero section) styles.
-   Navbar/footer/buttons now live in layout/layout.css — this file only
-   has the styles specific to the hero content on this page. */
-
-/* ---------- Hero ---------- */
-
 .rs-hero {
   display: flex;
   align-items: center;
-  padding-top: 15vh;
-
+  padding-top: 10vh;
   justify-content: space-between;
   width: 100%;
   flex-wrap: wrap;
 }
 
 .rs-hero-left {
-  flex: 2 1 480px;
+  flex: 2  480px;
   max-width: 820px;
 }
 
@@ -34,10 +27,10 @@
 }
 
 .rs-headline {
-  font-size: 70px;
+  font-size: 80px;
   line-height: 1;
   font-weight: 800;
-  margin: 20px 0 22px;
+  margin: 0 0 22px;
 }
 
 .rs-accent-text {
@@ -48,22 +41,31 @@
 }
 
 .rs-subtext {
-  font-size: clamp(15px, 1.6vw, 17px);
+  font-size: 15px;
+  padding-left: 11vh;
   line-height: 1.6;
   color: #a1a1aa;
   margin: 0 0 34px;
-  max-width: 480px;
+  max-width: 700px;
 }
 
 .rs-cta-row {
   display: flex;
-  gap: 16px;
+  gap: 10vh;
+  margin-left: 19vh;
   margin-bottom: 56px;
   flex-wrap: wrap;
 }
 
+/* Both CTA buttons match the width of the widest one (Browse Products)
+   instead of shrinking to fit their own text */
+.rs-cta-row .rs-btn {
+  min-width: 210px;
+}
+
 .rs-stats {
   display: flex;
+  margin-left: 30vh;
   gap: clamp(24px, 4vw, 48px);
   flex-wrap: wrap;
 }

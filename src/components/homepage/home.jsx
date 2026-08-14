@@ -13,14 +13,12 @@ export default function WebsiteHome() {
           Cambodia&apos;s #1 Digital Store
         </div>
 
-        <h1 className="rs-headline">
-          Premium <span className="rs-accent-text">Digital</span>
-          <br />
-          <span className="rs-accent-text">Products</span> Instant
-          <br />
+        <h1 className="rs-headline">Premium <span className="rs-accent-text">Digital</span> 
+          <span className="rs-accent-text"> Products</span> Instant
+          
           Delivery
         </h1>
-
+        
         <p className="rs-subtext">
           Get instant access to premium software, games, and digital
           products. Pay securely with KHQR.
