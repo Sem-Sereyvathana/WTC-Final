@@ -1,0 +1,119 @@
+/* Products page + card — reuses the same purple/dark theme as the rest
+   of the site. Prefixed "pc-" (product card) to avoid clashing with
+   rs- classes used elsewhere. */
+
+.pc-page {
+  padding: clamp(40px, 6vh, 64px) clamp(20px, 5vw, 60px) 80px;
+  max-width: 1400px;
+  margin: 0 auto;
+}
+
+.pc-page-header {
+  margin-bottom: 40px;
+}
+
+.pc-page-header h1 {
+  font-size: clamp(28px, 4vw, 42px);
+  font-weight: 800;
+  margin: 0 0 10px;
+  color: #f5f5f7;
+}
+
+.pc-page-header p {
+  color: #a1a1aa;
+  font-size: 15px;
+  margin: 0;
+}
+
+.pc-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+  gap: 24px;
+}
+
+.pc-card {
+  position: relative;
+  background: rgba(15, 15, 24, 0.85);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 16px;
+  padding: 24px;
+  display: flex;
+  flex-direction: column;
+  transition: transform 0.15s ease, border-color 0.15s ease;
+}
+
+.pc-card:hover {
+  transform: translateY(-4px);
+  border-color: rgba(168, 85, 247, 0.4);
+}
+
+.pc-badge {
+  position: absolute;
+  top: 16px;
+  right: 16px;
+  background: rgba(168, 85, 247, 0.15);
+  color: #c084fc;
+  font-size: 11px;
+  font-weight: 700;
+  padding: 4px 10px;
+  border-radius: 999px;
+}
+
+.pc-icon {
+  width: 100%;
+  height: 120px;
+  object-fit: cover;
+  border-radius: 10px;
+  margin-bottom: 16px;
+  background: rgba(255, 255, 255, 0.04);
+}
+
+.pc-name {
+  font-size: 17px;
+  font-weight: 700;
+  color: #f5f5f7;
+  margin: 0 0 8px;
+}
+
+.pc-description {
+  font-size: 13px;
+  color: #a1a1aa;
+  line-height: 1.5;
+  margin: 0 0 20px;
+  flex: 1;
+}
+
+.pc-footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+}
+
+.pc-price {
+  font-size: 20px;
+  font-weight: 800;
+  color: #a855f7;
+}
+
+.pc-btn {
+  background: linear-gradient(135deg, #8b5cf6, #6d28d9);
+  color: #fff;
+  border: none;
+  border-radius: 8px;
+  font-size: 13px;
+  font-weight: 700;
+  padding: 8px 14px;
+  cursor: pointer;
+  transition: filter 0.15s ease;
+}
+
+.pc-btn:hover:not(:disabled) {
+  filter: brightness(1.1);
+}
+
+.pc-btn:disabled {
+  background: rgba(255, 255, 255, 0.06);
+  color: #71717a;
+  cursor: not-allowed;
+}
