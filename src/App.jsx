@@ -6,6 +6,8 @@ import LoginForm from "./components/regandlog/login"
 import RegisterForm from "./components/regandlog/register"
 import LayoutPage from "./components/layout/Layout"
 import ProductsPage from "./components/product/ProductsPage"
+import FavoritesPage from "./components/product/FavoritesPage"
+import HistoryPage from "./components/product/HistoryPage"
 
 function App() {
   return (
@@ -15,6 +17,8 @@ function App() {
               <Route path="/register" element={<RegisterForm/>} />
               <Route path="/login" element={<LoginForm/>} />
               <Route path="/products" element={<ProductsPage/>} />
+              <Route path="/favorites" element={<FavoritesPage/>} />
+              <Route path="/history" element={<HistoryPage/>} />
       </Route>
     </Routes>
   );

@@ -190,6 +190,81 @@ html {
   height: 16px;
 }
 
+/* ---------- Profile menu (shown instead of Login/Sign Up when logged in) ---------- */
+
+.rs-profile {
+  position: relative;
+}
+
+.rs-profile-avatar {
+  width: 38px;
+  height: 38px;
+  border-radius: 999px;
+  background: linear-gradient(135deg, #8b5cf6, #6d28d9);
+  color: #fff;
+  border: none;
+  font-size: 15px;
+  font-weight: 700;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: filter 0.15s ease, transform 0.15s ease;
+}
+
+.rs-profile-avatar:hover {
+  filter: brightness(1.1);
+  transform: translateY(-1px);
+}
+
+.rs-profile-backdrop {
+  position: fixed;
+  inset: 0;
+  z-index: 60;
+}
+
+.rs-profile-menu {
+  position: absolute;
+  top: calc(100% + 10px);
+  right: 0;
+  min-width: 180px;
+  background: rgba(15, 15, 24, 0.97);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 12px;
+  padding: 8px;
+  box-shadow: rgba(0, 0, 0, 0.4) 0 12px 28px -8px;
+  z-index: 61;
+}
+
+.rs-profile-menu-name {
+  padding: 8px 10px 10px;
+  font-size: 13px;
+  font-weight: 700;
+  color: #f5f5f7;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+  margin-bottom: 6px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.rs-profile-menu-item {
+  width: 100%;
+  text-align: left;
+  background: transparent;
+  border: none;
+  color: #f87171;
+  font-size: 13px;
+  font-weight: 600;
+  padding: 9px 10px;
+  border-radius: 8px;
+  cursor: pointer;
+}
+
+.rs-profile-menu-item:hover {
+  background: rgba(248, 113, 113, 0.1);
+}
+
 /* ---------- Footer ---------- */
 
 .rs-footer {

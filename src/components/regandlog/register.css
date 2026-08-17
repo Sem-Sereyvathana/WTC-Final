@@ -1,0 +1,162 @@
+/* Register page — prefixed "rg-" so it never clashes with rs-/pc-/lg-
+   classes used elsewhere. Sits inside the .rs-page gradient background
+   from layout.css, so this file only styles the card itself. */
+
+.rg-wrap {
+  min-height: calc(100vh - 140px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: clamp(24px, 6vh, 64px) 20px;
+}
+
+.rg-card {
+  width: 100%;
+  max-width: 420px;
+  background: rgba(15, 15, 24, 0.85);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 18px;
+  padding: clamp(28px, 4vw, 40px);
+  box-shadow: rgba(0, 0, 0, 0.35) 0 20px 40px -12px;
+}
+
+.rg-header {
+  text-align: center;
+  margin-bottom: 28px;
+}
+
+.rg-header h1 {
+  font-size: 26px;
+  font-weight: 800;
+  color: #f5f5f7;
+  margin: 0 0 8px;
+}
+
+.rg-header p {
+  font-size: 14px;
+  color: #a1a1aa;
+  margin: 0;
+}
+
+.rg-form {
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+  /* index.css sets text-align: center on :root, so every label/hint/
+     input in here inherits it unless we override it back to left. */
+  text-align: left;
+}
+
+.rg-field {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.rg-label {
+  font-size: 13px;
+  font-weight: 600;
+  color: #d4d4d8;
+}
+
+.rg-input {
+  width: 100%;
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 10px;
+  padding: 12px 14px;
+  font-size: 14px;
+  color: #f5f5f7;
+  outline: none;
+  transition: border-color 0.15s ease, background 0.15s ease;
+}
+
+.rg-input::placeholder {
+  color: #6b6b76;
+}
+
+.rg-input:focus {
+  border-color: #a855f7;
+  background: rgba(168, 85, 247, 0.06);
+}
+
+.rg-input-error {
+  border-color: #f87171;
+}
+
+.rg-error-text {
+  font-size: 12px;
+  color: #f87171;
+  margin: 0;
+}
+
+.rg-hint {
+  font-size: 11px;
+  color: #71717a;
+  margin: 0;
+}
+
+.rg-terms {
+  display: flex;
+  align-items: flex-start;
+  gap: 8px;
+  font-size: 12px;
+  color: #a1a1aa;
+  line-height: 1.5;
+}
+
+.rg-terms input {
+  margin-top: 2px;
+  accent-color: #a855f7;
+}
+
+.rg-terms a {
+  color: #c084fc;
+  text-decoration: none;
+}
+
+.rg-terms a:hover {
+  text-decoration: underline;
+}
+
+.rg-submit {
+  background: linear-gradient(135deg, #8b5cf6, #6d28d9);
+  color: #fff;
+  border: none;
+  border-radius: 10px;
+  font-size: 14px;
+  font-weight: 700;
+  padding: 13px 14px;
+  cursor: pointer;
+  transition: filter 0.15s ease, transform 0.15s ease;
+}
+
+.rg-submit:hover {
+  filter: brightness(1.1);
+}
+
+.rg-submit:active {
+  transform: translateY(1px);
+}
+
+.rg-submit:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+.rg-footer-text {
+  text-align: center;
+  font-size: 13px;
+  color: #a1a1aa;
+  margin: 18px 0 0;
+}
+
+.rg-footer-text a {
+  color: #c084fc;
+  font-weight: 600;
+  text-decoration: none;
+}
+
+.rg-footer-text a:hover {
+  text-decoration: underline;
+}

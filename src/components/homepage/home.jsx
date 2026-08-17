@@ -1,10 +1,13 @@
 import { Link } from "react-router-dom";
+import { useAuth } from "../../hooks/useAuth";
 import "./homedesign.css";
 
 // Header and Footer now come from Layout.jsx and wrap this component
 // automatically via App.jsx routing — this file only needs the
 // page-specific hero content.
 export default function WebsiteHome() {
+  const { isLoggedIn, username } = useAuth();
+
   return (
     <header className="rs-hero">
       <div className="rs-hero-left">
@@ -20,17 +23,20 @@ export default function WebsiteHome() {
         </h1>
         
         <p className="rs-subtext">
-          Get instant access to premium software, games, and digital
-          products. Pay securely with KHQR.
+          {isLoggedIn
+            ? `Welcome back${username ? `, ${username}` : ""} — browse the latest digital products below.`
+            : "Get instant access to premium software, games, and digital products. Pay securely with KHQR."}
         </p>
 
         <div className="rs-cta-row">
           <Link to="/products" className="rs-btn rs-btn-primary rs-btn-lg">
             <CartIcon /> Browse Products
           </Link>
-          <Link to="/register" className="rs-btn rs-btn-dark rs-btn-lg">
-            <UserPlusIcon /> Get Started
-          </Link>
+          {!isLoggedIn && (
+            <Link to="/register" className="rs-btn rs-btn-dark rs-btn-lg">
+              <UserPlusIcon /> Get Started
+            </Link>
+          )}
         </div>
 
         <div className="rs-stats">
@@ -149,5 +155,3 @@ function CheckIcon() {
     </svg>
   );
 }
-
-
