@@ -1,7 +1,3 @@
-/* Register page — prefixed "rg-" so it never clashes with rs-/pc-/lg-
-   classes used elsewhere. Sits inside the .rs-page gradient background
-   from layout.css, so this file only styles the card itself. */
-
 .rg-wrap {
   min-height: calc(100vh - 140px);
   display: flex;
@@ -13,11 +9,11 @@
 .rg-card {
   width: 100%;
   max-width: 420px;
-  background: rgba(15, 15, 24, 0.85);
-  border: 1px solid rgba(255, 255, 255, 0.08);
+  background: #ffffff;
+  border: 1px solid rgba(16, 22, 42, 0.08);
   border-radius: 18px;
   padding: clamp(28px, 4vw, 40px);
-  box-shadow: rgba(0, 0, 0, 0.35) 0 20px 40px -12px;
+  box-shadow: rgba(16, 22, 42, 0.12) 0 20px 40px -12px;
 }
 
 .rg-header {
@@ -28,13 +24,13 @@
 .rg-header h1 {
   font-size: 26px;
   font-weight: 800;
-  color: #f5f5f7;
+  color: #10162a;
   margin: 0 0 8px;
 }
 
 .rg-header p {
   font-size: 14px;
-  color: #a1a1aa;
+  color: #475569;
   margin: 0;
 }
 
@@ -42,8 +38,7 @@
   display: flex;
   flex-direction: column;
   gap: 18px;
-  /* index.css sets text-align: center on :root, so every label/hint/
-     input in here inherits it unless we override it back to left. */
+
   text-align: left;
 }
 
@@ -56,28 +51,28 @@
 .rg-label {
   font-size: 13px;
   font-weight: 600;
-  color: #d4d4d8;
+  color: #334155;
 }
 
 .rg-input {
   width: 100%;
-  background: rgba(255, 255, 255, 0.04);
-  border: 1px solid rgba(255, 255, 255, 0.1);
+  background: #f8fafc;
+  border: 1px solid #e2e8f0;
   border-radius: 10px;
   padding: 12px 14px;
   font-size: 14px;
-  color: #f5f5f7;
+  color: #10162a;
   outline: none;
   transition: border-color 0.15s ease, background 0.15s ease;
 }
 
 .rg-input::placeholder {
-  color: #6b6b76;
+  color: #94a3b8;
 }
 
 .rg-input:focus {
-  border-color: #a855f7;
-  background: rgba(168, 85, 247, 0.06);
+  border-color: #38bdf8;
+  background: rgba(56, 189, 248, 0.06);
 }
 
 .rg-input-error {
@@ -92,7 +87,7 @@
 
 .rg-hint {
   font-size: 11px;
-  color: #71717a;
+  color: #94a3b8;
   margin: 0;
 }
 
@@ -101,17 +96,17 @@
   align-items: flex-start;
   gap: 8px;
   font-size: 12px;
-  color: #a1a1aa;
+  color: #475569;
   line-height: 1.5;
 }
 
 .rg-terms input {
   margin-top: 2px;
-  accent-color: #a855f7;
+  accent-color: #2563eb;
 }
 
 .rg-terms a {
-  color: #c084fc;
+  color: #2563eb;
   text-decoration: none;
 }
 
@@ -120,7 +115,7 @@
 }
 
 .rg-submit {
-  background: linear-gradient(135deg, #8b5cf6, #6d28d9);
+  background: linear-gradient(135deg, #3b82f6, #4338ca);
   color: #fff;
   border: none;
   border-radius: 10px;
@@ -147,12 +142,12 @@
 .rg-footer-text {
   text-align: center;
   font-size: 13px;
-  color: #a1a1aa;
+  color: #475569;
   margin: 18px 0 0;
 }
 
 .rg-footer-text a {
-  color: #c084fc;
+  color: #2563eb;
   font-weight: 600;
   text-decoration: none;
 }

@@ -5,8 +5,6 @@ import { useAuth } from "../../hooks/useAuth";
 import ProductCard from "./ProductCard";
 import "./product.css";
 
-// Maps a Supabase "products" row -> the shape ProductCard expects.
-// Kept in sync with ProductsPage.jsx's mapRow().
 function mapRow(row) {
   return {
     id: row.id,
@@ -84,11 +82,7 @@ export default function FavoritesPage() {
 
   return (
     <section className="pc-page">
-      <div className="pc-page-header">
-        <h1>Your Favorites</h1>
-        <p>Products you've hearted, all in one place.</p>
-      </div>
-
+      
       {!authLoading && !isLoggedIn && (
         <p className="pc-state-text">
           <Link to="/login">Log in</Link> to see your favorites.

@@ -1,7 +1,3 @@
-/* Products page + card — reuses the same purple/dark theme as the rest
-   of the site. Prefixed "pc-" (product card) to avoid clashing with
-   rs- classes used elsewhere. */
-
 .pc-page {
   padding: clamp(40px, 6vh, 64px) clamp(20px, 5vw, 60px) 80px;
   max-width: 1400px;
@@ -16,11 +12,11 @@
   font-size: clamp(28px, 4vw, 42px);
   font-weight: 800;
   margin: 0 0 10px;
-  color: #f5f5f7;
+  color: #f1f5f9;
 }
 
 .pc-page-header p {
-  color: #a1a1aa;
+  color: #94a3b8;
   font-size: 15px;
   margin: 0;
 }
@@ -33,26 +29,21 @@
 
 .pc-card {
   position: relative;
-  background: rgba(15, 15, 24, 0.85);
+  background: #141b2e;
   border: 1px solid rgba(255, 255, 255, 0.08);
   border-radius: 16px;
   padding: 24px;
   display: flex;
   flex-direction: column;
-  transition: transform 0.15s ease, border-color 0.15s ease;
-}
-
-.pc-card:hover {
-  transform: translateY(-4px);
-  border-color: rgba(168, 85, 247, 0.4);
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.3);
 }
 
 .pc-badge {
   position: absolute;
   top: 16px;
   right: 16px;
-  background: rgba(168, 85, 247, 0.15);
-  color: #c084fc;
+  background: rgba(37, 99, 235, 0.1);
+  color: #2563eb;
   font-size: 11px;
   font-weight: 700;
   padding: 4px 10px;
@@ -65,10 +56,8 @@
   object-fit: cover;
   border-radius: 10px;
   margin-bottom: 16px;
-  background: rgba(255, 255, 255, 0.04);
+  background: rgba(255, 255, 255, 0.06);
 }
-
-/* ---------- Favorite heart (top-left overlay on every card) ---------- */
 
 .pc-heart {
   position: absolute;
@@ -107,8 +96,6 @@
   stroke: #f43f5e;
 }
 
-/* ---------- Purchase history list (see HistoryPage.jsx) ---------- */
-
 .pc-history-list {
   display: flex;
   flex-direction: column;
@@ -119,10 +106,11 @@
   display: flex;
   align-items: center;
   gap: 16px;
-  background: rgba(15, 15, 24, 0.85);
+  background: #141b2e;
   border: 1px solid rgba(255, 255, 255, 0.08);
   border-radius: 14px;
   padding: 14px 18px;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.3);
 }
 
 .pc-history-img {
@@ -130,7 +118,7 @@
   height: 56px;
   object-fit: cover;
   border-radius: 8px;
-  background: rgba(255, 255, 255, 0.04);
+  background: rgba(255, 255, 255, 0.06);
   flex-shrink: 0;
 }
 
@@ -143,32 +131,289 @@
   font-size: 15px;
   font-weight: 700;
   margin: 0 0 4px;
-  color: #f5f5f7;
+  color: #f1f5f9;
 }
 
 .pc-history-info p {
   font-size: 12px;
-  color: #a1a1aa;
+  color: #94a3b8;
   margin: 0;
 }
 
 .pc-history-price {
   font-size: 16px;
   font-weight: 800;
-  color: #a855f7;
+  color: #38bdf8;
   flex-shrink: 0;
+}
+
+.pc-view-btn {
+  flex-shrink: 0;
+  padding: 8px 16px;
+  border-radius: 8px;
+  border: 1px solid rgba(37, 99, 235, 0.4);
+  background: transparent;
+  color: #2563eb;
+  font-size: 13px;
+  font-weight: 700;
+  cursor: pointer;
+  transition: background 0.15s ease, color 0.15s ease;
+}
+
+.pc-view-btn:hover {
+  background: rgba(37, 99, 235, 0.1);
+  color: #1d4ed8;
+}
+
+.pc-modal-backdrop {
+  position: fixed;
+  inset: 0;
+  z-index: 50;
+  background: rgba(5, 5, 10, 0.7);
+  backdrop-filter: blur(2px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+}
+
+.pc-modal {
+  width: 100%;
+  max-width: 380px;
+  background: #141b2e;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 16px;
+  padding: 28px;
+  box-shadow: 0 20px 40px -12px rgba(0, 0, 0, 0.5);
+}
+
+.pc-modal-title {
+  margin: 0 0 4px;
+  font-size: 18px;
+  font-weight: 800;
+  color: #f1f5f9;
+}
+
+.pc-modal-subtitle {
+  margin: 0 0 20px;
+  font-size: 13px;
+  color: #94a3b8;
+}
+
+.pc-modal-field {
+  margin-bottom: 16px;
+}
+
+.pc-modal-field label {
+  display: block;
+  font-size: 11px;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: #94a3b8;
+  margin-bottom: 6px;
+  text-align: left;
+}
+
+.pc-modal-value {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 10px;
+  padding: 10px 12px;
+  text-align: left;
+}
+
+.pc-modal-value span {
+  flex: 1;
+  min-width: 0;
+  font-size: 14px;
+  color: #e5e9f2;
+  word-break: break-all;
+  text-align: left;
+}
+
+.pc-modal-value button {
+  flex-shrink: 0;
+  padding: 6px 12px;
+  border-radius: 7px;
+  border: none;
+  background: #38bdf8;
+  color: #14121e;
+  font-size: 12px;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+.pc-modal-close {
+  width: 100%;
+  margin-top: 4px;
+  padding: 10px;
+  border-radius: 10px;
+  border: 1px solid rgba(255, 255, 255, 0.14);
+  background: transparent;
+  color: #e5e9f2;
+  font-size: 14px;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+.pc-confirm-product {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  margin-bottom: 16px;
+  text-align: left;
+}
+
+.pc-confirm-img {
+  width: 56px;
+  height: 56px;
+  object-fit: cover;
+  border-radius: 10px;
+  flex-shrink: 0;
+  background: rgba(16, 22, 42, 0.04);
+}
+
+.pc-confirm-info h3 {
+  font-size: 15px;
+  font-weight: 700;
+  color: #f1f5f9;
+  margin: 0 0 4px;
+}
+
+.pc-confirm-info p {
+  font-size: 12px;
+  color: #94a3b8;
+  margin: 0;
+}
+
+.pc-confirm-total {
+  margin-bottom: 20px;
+}
+
+.pc-confirm-total span:first-child {
+  color: #94a3b8;
+  font-size: 13px;
+  font-weight: 600;
+}
+
+.pc-confirm-price {
+  font-size: 18px;
+  font-weight: 800;
+  color: #38bdf8;
+}
+
+.pc-modal-actions {
+  display: flex;
+  gap: 10px;
+  margin-top: 4px;
+}
+
+.pc-modal-btn-secondary {
+  flex: 1;
+  padding: 10px;
+  border-radius: 10px;
+  border: 1px solid rgba(255, 255, 255, 0.14);
+  background: transparent;
+  color: #e5e9f2;
+  font-size: 14px;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+.pc-modal-btn-secondary:disabled {
+  color: #94a3b8;
+  cursor: not-allowed;
+}
+
+.pc-modal-btn-primary {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  padding: 10px;
+  font-size: 14px;
+}
+
+.pc-demo-badge {
+  display: inline-block;
+  background: rgba(251, 191, 36, 0.15);
+  color: #fbbf24;
+  font-size: 10px;
+  font-weight: 800;
+  letter-spacing: 0.06em;
+  padding: 4px 10px;
+  border-radius: 999px;
+  margin-bottom: 10px;
+}
+
+.pc-khqr-box {
+  background: #f1f5f9;
+  border-radius: 14px;
+  padding: 18px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-bottom: 16px;
+}
+
+.pc-khqr-placeholder {
+  width: 132px;
+  height: 132px;
+  border: 2px dashed rgba(20, 18, 30, 0.25);
+  border-radius: 8px;
+  margin-bottom: 12px;
+}
+
+.pc-khqr-merchant {
+  font-size: 12px;
+  font-weight: 700;
+  color: #14121e;
+  margin: 0 0 2px;
+}
+
+.pc-khqr-amount {
+  font-size: 16px;
+  font-weight: 800;
+  color: #1d4ed8;
+  margin: 0;
+}
+
+.pc-payment-error {
+  margin: 0 0 14px;
+  font-size: 13px;
+}
+
+.pc-spinner {
+  width: 13px;
+  height: 13px;
+  border: 2px solid rgba(255, 255, 255, 0.35);
+  border-top-color: #fff;
+  border-radius: 50%;
+  display: inline-block;
+  animation: pc-spin 0.7s linear infinite;
+}
+
+@keyframes pc-spin {
+  to {
+    transform: rotate(360deg);
+  }
 }
 
 .pc-name {
   font-size: 17px;
   font-weight: 700;
-  color: #f5f5f7;
+  color: #f1f5f9;
   margin: 0 0 8px;
 }
 
 .pc-description {
   font-size: 13px;
-  color: #a1a1aa;
+  color: #94a3b8;
   line-height: 1.5;
   margin: 0 0 20px;
   flex: 1;
@@ -184,11 +429,11 @@
 .pc-price {
   font-size: 20px;
   font-weight: 800;
-  color: #a855f7;
+  color: #38bdf8;
 }
 
 .pc-btn {
-  background: linear-gradient(135deg, #8b5cf6, #6d28d9);
+  background: linear-gradient(135deg, #3b82f6, #4338ca);
   color: #fff;
   border: none;
   border-radius: 8px;
@@ -204,8 +449,8 @@
 }
 
 .pc-btn:disabled {
-  background: rgba(255, 255, 255, 0.06);
-  color: #71717a;
+  background: rgba(255, 255, 255, 0.08);
+  color: #94a3b8;
   cursor: not-allowed;
 }
 
@@ -221,11 +466,11 @@
 }
 
 .pc-stock-out {
-  color: #71717a;
+  color: #94a3b8;
 }
 
 .pc-state-text {
-  color: #a1a1aa;
+  color: #94a3b8;
   font-size: 14px;
 }
 

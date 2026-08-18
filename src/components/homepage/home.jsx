@@ -2,20 +2,13 @@ import { Link } from "react-router-dom";
 import { useAuth } from "../../hooks/useAuth";
 import "./homedesign.css";
 
-// Header and Footer now come from Layout.jsx and wrap this component
-// automatically via App.jsx routing — this file only needs the
-// page-specific hero content.
 export default function WebsiteHome() {
   const { isLoggedIn, username } = useAuth();
 
   return (
     <header className="rs-hero">
       <div className="rs-hero-left">
-        <div className="rs-badge">
-          <span className="rs-badge-icon">⚡</span>
-          Cambodia&apos;s #1 Digital Store
-        </div>
-
+        
         <h1 className="rs-headline">Premium <span className="rs-accent-text">Digital</span> 
           <span className="rs-accent-text"> Products</span> Instant
           
@@ -28,7 +21,7 @@ export default function WebsiteHome() {
             : "Get instant access to premium software, games, and digital products. Pay securely with KHQR."}
         </p>
 
-        <div className="rs-cta-row">
+        <div className={`rs-cta-row ${isLoggedIn ? "rs-cta-row-single" : ""}`}>
           <Link to="/products" className="rs-btn rs-btn-primary rs-btn-lg">
             <CartIcon /> Browse Products
           </Link>
@@ -41,11 +34,11 @@ export default function WebsiteHome() {
 
         <div className="rs-stats">
           <div className="rs-stat">
-            <div className="rs-stat-num">19+</div>
+            <div className="rs-stat-num">15</div>
             <div className="rs-stat-label">Products</div>
           </div>
           <div className="rs-stat">
-            <div className="rs-stat-num">973+</div>
+            <div className="rs-stat-num">67+</div>
             <div className="rs-stat-label">Orders</div>
           </div>
           <div className="rs-stat">
@@ -89,8 +82,6 @@ export default function WebsiteHome() {
     </header>
   );
 }
-
-/* --- inline icons (no extra dependency needed) --- */
 
 function CartIcon() {
   return (

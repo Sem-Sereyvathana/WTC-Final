@@ -1,12 +1,8 @@
 import { useEffect, useState } from "react";
 import { supabase } from "../../supabase_client";
 
-// Shared auth-state hook — call this from any component that needs to
-// know whether someone is logged in (e.g. Header, WebsiteHome). Each
-// call subscribes independently to Supabase's auth listener, so no
-// context/provider wiring is required.
 export function useAuth() {
-  const [session, setSession] = useState(undefined); // undefined = still loading
+  const [session, setSession] = useState(undefined);
   const [profile, setProfile] = useState(null);
 
   useEffect(() => {

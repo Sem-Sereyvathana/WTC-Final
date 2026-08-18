@@ -42,6 +42,9 @@ export default function Header() {
         <NavLink to="/history" className={linkClass} onClick={() => setMenuOpen(false)}>
           History
         </NavLink>
+        <NavLink to="/about" className={linkClass} onClick={() => setMenuOpen(false)}>
+          About Us
+        </NavLink>
       </div>
 
       <div className="rs-nav-actions">

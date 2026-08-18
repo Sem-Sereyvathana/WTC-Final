@@ -1,6 +1,3 @@
-/* Shared layout: page wrapper, navbar, buttons, footer.
-   Used by every page via Layout.jsx, so update it once, everywhere updates. */
-
 * {
   box-sizing: border-box;
 }
@@ -14,18 +11,8 @@ html {
   width: 100%;
   display: flex;
   flex-direction: column;
-  background: radial-gradient(
-      ellipse at 70% 60%,
-      rgba(45, 130, 160, 0.25) 0%,
-      transparent 55%
-    ),
-    radial-gradient(
-      ellipse at 15% 15%,
-      rgba(124, 58, 237, 0.25) 0%,
-      transparent 45%
-    ),
-    #0a0a14;
-  color: #f5f5f7;
+  background: #0b1220;
+  color: #e5e9f2;
   font-family: "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
 }
 
@@ -38,24 +25,15 @@ html {
   text-decoration: none;
 }
 
-/* ---------- Navbar ---------- */
-
 .rs-navbar {
   display: flex;
   align-items: center;
   justify-content: space-between;
   gap: 16px;
   padding: 18px clamp(20px, 4vw, 48px);
-  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
-  /* sticky NEEDS an offset (top/bottom/left/right) to know when to
-     kick in — without "top: 0" it silently behaves like static */
-  position: sticky;
-  top: 0;
-  z-index: 50;
-  /* solid-ish background + blur so page content scrolling underneath
-     doesn't show through the now-floating navbar */
-  background: rgba(10, 10, 20, 0.85);
-  backdrop-filter: blur(8px);
+  border-bottom: none;
+  background: #111a2e;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.06);
 }
 
 .rs-logo {
@@ -74,7 +52,7 @@ html {
   width: 34px;
   height: 34px;
   border-radius: 9px;
-  background: linear-gradient(135deg, #7c3aed, #4f46e5);
+  background: linear-gradient(135deg, #2563eb, #4f46e5);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -94,9 +72,11 @@ html {
 .rs-nav-link {
   background: transparent;
   border: none;
-  color: #cbd5e1;
-  font-size: 15px;
-  font-weight: 600;
+  color: rgba(255, 255, 255, 0.85);
+  font-size: 14px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.4px;
   padding: 8px 16px;
   border-radius: 8px;
   cursor: pointer;
@@ -109,7 +89,7 @@ html {
 }
 
 .rs-nav-link-active {
-  background: rgba(124, 58, 237, 0.25);
+  background: rgba(255, 255, 255, 0.16);
   color: #fff;
 }
 
@@ -119,8 +99,6 @@ html {
   gap: 12px;
 }
 
-/* Hamburger menu button — hidden on desktop, shown once the nav
-   links collapse (see breakpoint below) */
 .rs-menu-toggle {
   display: none;
   flex-direction: column;
@@ -142,8 +120,6 @@ html {
   border-radius: 2px;
 }
 
-/* ---------- Buttons ---------- */
-
 .rs-btn {
   display: inline-flex;
   align-items: center;
@@ -164,7 +140,7 @@ html {
 }
 
 .rs-btn-primary {
-  background: linear-gradient(135deg, #8b5cf6, #6d28d9);
+  background: linear-gradient(135deg, #3b82f6, #4338ca);
   color: #fff;
 }
 
@@ -174,9 +150,9 @@ html {
 }
 
 .rs-btn-dark {
-  background: rgba(255, 255, 255, 0.06);
-  color: #f5f5f7;
-  border: 1px solid rgba(255, 255, 255, 0.12);
+  background: #10162a;
+  color: #fff;
+  border: 1px solid #10162a;
 }
 
 .rs-btn-lg {
@@ -190,8 +166,6 @@ html {
   height: 16px;
 }
 
-/* ---------- Profile menu (shown instead of Login/Sign Up when logged in) ---------- */
-
 .rs-profile {
   position: relative;
 }
@@ -200,7 +174,7 @@ html {
   width: 38px;
   height: 38px;
   border-radius: 999px;
-  background: linear-gradient(135deg, #8b5cf6, #6d28d9);
+  background: linear-gradient(135deg, #3b82f6, #4338ca);
   color: #fff;
   border: none;
   font-size: 15px;
@@ -228,11 +202,11 @@ html {
   top: calc(100% + 10px);
   right: 0;
   min-width: 180px;
-  background: rgba(15, 15, 24, 0.97);
-  border: 1px solid rgba(255, 255, 255, 0.1);
+  background: #171f33;
+  border: 1px solid rgba(255, 255, 255, 0.08);
   border-radius: 12px;
   padding: 8px;
-  box-shadow: rgba(0, 0, 0, 0.4) 0 12px 28px -8px;
+  box-shadow: rgba(0, 0, 0, 0.45) 0 12px 28px -8px;
   z-index: 61;
 }
 
@@ -240,7 +214,7 @@ html {
   padding: 8px 10px 10px;
   font-size: 13px;
   font-weight: 700;
-  color: #f5f5f7;
+  color: #e5e9f2;
   border-bottom: 1px solid rgba(255, 255, 255, 0.08);
   margin-bottom: 6px;
   white-space: nowrap;
@@ -265,10 +239,9 @@ html {
   background: rgba(248, 113, 113, 0.1);
 }
 
-/* ---------- Footer ---------- */
-
 .rs-footer {
-  border-top: 1px solid rgba(255, 255, 255, 0.08);
+  background: #111a2e;
+  border-top: 1px solid rgba(255, 255, 255, 0.06);
   padding: 48px clamp(20px, 4vw, 48px) 24px;
   margin-top: 40px;
 }
@@ -286,7 +259,7 @@ html {
 }
 
 .rs-footer-tagline {
-  color: #a1a1aa;
+  color: rgba(255, 255, 255, 0.8);
   font-size: 14px;
   line-height: 1.6;
   margin: 14px 0 0;
@@ -308,14 +281,18 @@ html {
   font-size: 13px;
   text-transform: uppercase;
   letter-spacing: 0.6px;
-  color: #71717a;
+  color: rgba(255, 255, 255, 0.65);
   margin: 0 0 4px;
 }
 
 .rs-footer-col a {
-  color: #cbd5e1;
+  color: rgba(255, 255, 255, 0.9);
   text-decoration: none;
   font-size: 14px;
+}
+
+.rs-footer-contact {
+  gap: 6px;
 }
 
 .rs-footer-col a:hover {
@@ -323,14 +300,12 @@ html {
 }
 
 .rs-footer-bottom {
-  border-top: 1px solid rgba(255, 255, 255, 0.08);
+  border-top: 1px solid rgba(255, 255, 255, 0.18);
   padding-top: 20px;
   font-size: 13px;
-  color: #71717a;
+  color: rgba(255, 255, 255, 0.7);
   text-align: center;
 }
-
-/* ---------- Responsive ---------- */
 
 @media (max-width: 860px) {
   .rs-nav-links {
@@ -340,8 +315,8 @@ html {
     right: 0;
     flex-direction: column;
     align-items: stretch;
-    background: #0d0d16;
-    border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+    background: #111a2e;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.12);
     padding: 12px clamp(20px, 4vw, 48px) 16px;
     gap: 4px;
     display: none;
@@ -360,8 +335,6 @@ html {
     display: flex;
   }
 
-  /* Sign Up / Login stay visible on tablet; hide them only on
-     very small screens so the bar doesn't get cramped */
 }
 
 @media (max-width: 480px) {

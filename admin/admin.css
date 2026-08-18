@@ -1,0 +1,502 @@
+.ad-shell {
+  min-height: 100vh;
+  display: flex;
+  background: #0b1220;
+  color: #e5e9f2;
+  font-family: "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+}
+
+.ad-loading {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #0b1220;
+  color: #94a3b8;
+}
+
+.ad-sidebar {
+  width: 260px;
+  flex-shrink: 0;
+  background: #111a2e;
+  border-right: 1px solid rgba(255, 255, 255, 0.06);
+  padding: 24px 18px;
+  display: flex;
+  flex-direction: column;
+  position: sticky;
+  top: 0;
+  height: 100vh;
+}
+
+.ad-logo {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 19px;
+  font-weight: 800;
+  text-decoration: none;
+  color: #f5f5f7;
+  margin-bottom: 4px;
+}
+
+.ad-logo-badge {
+  width: 32px;
+  height: 32px;
+  border-radius: 9px;
+  background: linear-gradient(135deg, #2563eb, #4f46e5);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 15px;
+  flex-shrink: 0;
+}
+
+.ad-logo-accent {
+  color: #22d3ee;
+}
+
+.ad-sidebar-tag {
+  display: inline-block;
+  width: fit-content;
+  font-size: 11px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: #93c5fd;
+  background: rgba(37, 99, 235, 0.15);
+  padding: 3px 10px;
+  border-radius: 999px;
+  margin: 10px 0 28px;
+}
+
+.ad-nav {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  flex: 1;
+}
+
+.ad-nav-link {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 10px 12px;
+  border-radius: 10px;
+  color: #94a3b8;
+  text-decoration: none;
+  font-size: 14px;
+  font-weight: 600;
+}
+
+.ad-nav-link:hover {
+  background: rgba(255, 255, 255, 0.04);
+  color: #e5e9f2;
+}
+
+.ad-nav-link-active {
+  background: rgba(37, 99, 235, 0.15);
+  color: #93c5fd;
+}
+
+.ad-nav-icon {
+  width: 18px;
+  height: 18px;
+  flex-shrink: 0;
+}
+
+.ad-sidebar-footer {
+  border-top: 1px solid rgba(255, 255, 255, 0.06);
+  padding-top: 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.ad-sidebar-user {
+  font-size: 13px;
+  font-weight: 700;
+  color: #e5e9f2;
+  margin-bottom: 6px;
+}
+
+.ad-sidebar-link {
+  background: transparent;
+  border: none;
+  text-align: left;
+  color: #94a3b8;
+  font-size: 13px;
+  text-decoration: none;
+  padding: 6px 4px;
+  cursor: pointer;
+}
+
+.ad-sidebar-link:hover {
+  color: #e5e9f2;
+}
+
+.ad-signout {
+  color: #f87171;
+}
+
+.ad-signout:hover {
+  color: #fca5a5;
+}
+
+.ad-main {
+  flex: 1;
+  min-width: 0;
+}
+
+.ad-page {
+  padding: 40px clamp(20px, 4vw, 48px) 60px;
+  max-width: 1200px;
+}
+
+.ad-page-header {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 20px;
+  flex-wrap: wrap;
+  margin-bottom: 28px;
+}
+
+.ad-page-header h1 {
+  font-size: 26px;
+  font-weight: 800;
+  margin: 0 0 6px;
+  color: #f1f5f9;
+}
+
+.ad-page-header p {
+  font-size: 14px;
+  color: #94a3b8;
+  margin: 0;
+}
+
+.ad-search {
+  background: #141b2e;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 10px;
+  padding: 10px 14px;
+  color: #e5e9f2;
+  font-size: 14px;
+  min-width: 220px;
+}
+
+.ad-search::placeholder {
+  color: #64748b;
+}
+
+.ad-search:focus {
+  outline: none;
+  border-color: #2563eb;
+}
+
+.ad-card {
+  background: #141b2e;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 16px;
+  overflow: hidden;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.3);
+  overflow-x: auto;
+}
+
+.ad-table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.ad-table th,
+.ad-table td {
+  text-align: left;
+  padding: 14px 18px;
+  font-size: 14px;
+  white-space: nowrap;
+}
+
+.ad-table th {
+  color: #94a3b8;
+  font-size: 12px;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  font-weight: 700;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.ad-table td {
+  color: #e5e9f2;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.ad-table tr:last-child td {
+  border-bottom: none;
+}
+
+.ad-thumb {
+  width: 40px;
+  height: 40px;
+  object-fit: cover;
+  border-radius: 8px;
+  background: rgba(255, 255, 255, 0.06);
+  display: block;
+}
+
+.ad-role-badge {
+  display: inline-block;
+  font-size: 11px;
+  font-weight: 700;
+  padding: 3px 10px;
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.06);
+  color: #94a3b8;
+  text-transform: capitalize;
+}
+
+.ad-role-admin {
+  background: rgba(37, 99, 235, 0.15);
+  color: #93c5fd;
+}
+
+.ad-btn-primary,
+.ad-btn-secondary,
+.ad-btn-ghost {
+  border: none;
+  border-radius: 8px;
+  font-weight: 700;
+  font-size: 13px;
+  padding: 9px 16px;
+  cursor: pointer;
+  transition: filter 0.15s ease, background 0.15s ease;
+}
+
+.ad-btn-primary {
+  background: linear-gradient(135deg, #3b82f6, #4338ca);
+  color: #fff;
+}
+
+.ad-btn-primary:hover:not(:disabled) {
+  filter: brightness(1.08);
+}
+
+.ad-btn-secondary {
+  background: transparent;
+  border: 1px solid rgba(255, 255, 255, 0.14);
+  color: #e5e9f2;
+}
+
+.ad-btn-ghost {
+  background: transparent;
+  border: 1px solid rgba(37, 99, 235, 0.4);
+  color: #60a5fa;
+}
+
+.ad-btn-ghost:hover {
+  background: rgba(37, 99, 235, 0.1);
+}
+
+.ad-btn-primary:disabled,
+.ad-btn-secondary:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+.ad-state-text {
+  color: #94a3b8;
+  font-size: 14px;
+}
+
+.ad-state-error {
+  color: #f87171;
+}
+
+.ad-modal-backdrop {
+  position: fixed;
+  inset: 0;
+  z-index: 50;
+  background: rgba(5, 5, 10, 0.7);
+  backdrop-filter: blur(2px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+}
+
+.ad-modal {
+  width: 100%;
+  max-width: 460px;
+  max-height: 85vh;
+  overflow-y: auto;
+  background: #141b2e;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 16px;
+  padding: 28px;
+  box-shadow: 0 20px 40px -12px rgba(0, 0, 0, 0.5);
+}
+
+.ad-modal-title {
+  margin: 0 0 4px;
+  font-size: 18px;
+  font-weight: 800;
+  color: #f1f5f9;
+}
+
+.ad-modal-subtitle {
+  margin: 0 0 20px;
+  font-size: 13px;
+  color: #94a3b8;
+}
+
+.ad-modal-close {
+  width: 100%;
+  margin-top: 16px;
+  padding: 10px;
+  border-radius: 10px;
+  border: 1px solid rgba(255, 255, 255, 0.14);
+  background: transparent;
+  color: #e5e9f2;
+  font-size: 14px;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+.ad-modal-actions {
+  display: flex;
+  gap: 10px;
+  margin-top: 20px;
+}
+
+.ad-modal-actions .ad-btn-primary,
+.ad-modal-actions .ad-btn-secondary {
+  flex: 1;
+}
+
+.ad-history-list {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.ad-history-row {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid rgba(255, 255, 255, 0.06);
+  border-radius: 12px;
+  padding: 10px 14px;
+}
+
+.ad-history-img {
+  width: 44px;
+  height: 44px;
+  object-fit: cover;
+  border-radius: 8px;
+  flex-shrink: 0;
+  background: rgba(255, 255, 255, 0.06);
+}
+
+.ad-history-info {
+  flex: 1;
+  min-width: 0;
+}
+
+.ad-history-info h4 {
+  font-size: 14px;
+  font-weight: 700;
+  margin: 0 0 2px;
+  color: #f1f5f9;
+}
+
+.ad-history-info p {
+  font-size: 12px;
+  color: #94a3b8;
+  margin: 0;
+}
+
+.ad-history-price {
+  font-size: 14px;
+  font-weight: 800;
+  color: #38bdf8;
+  flex-shrink: 0;
+}
+
+.ad-form {
+  display: flex;
+  flex-direction: column;
+}
+
+.ad-field {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  margin-bottom: 14px;
+  text-align: left;
+}
+
+.ad-field span {
+  font-size: 12px;
+  font-weight: 700;
+  color: #94a3b8;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+}
+
+.ad-field input,
+.ad-field textarea {
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 8px;
+  padding: 10px 12px;
+  color: #e5e9f2;
+  font-size: 14px;
+  font-family: inherit;
+  resize: vertical;
+}
+
+.ad-field input:focus,
+.ad-field textarea:focus {
+  outline: none;
+  border-color: #2563eb;
+}
+
+/* Responsive */
+
+@media (max-width: 860px) {
+  .ad-shell {
+    flex-direction: column;
+  }
+
+  .ad-sidebar {
+    width: 100%;
+    height: auto;
+    position: static;
+    flex-direction: row;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 16px;
+  }
+
+  .ad-nav {
+    flex-direction: row;
+    flex: none;
+  }
+
+  .ad-sidebar-footer {
+    border-top: none;
+    flex-direction: row;
+    align-items: center;
+    margin-left: auto;
+    padding-top: 0;
+  }
+}
+
+.ad-btn-danger {
+  color: #ef4444;
+  border-color: #ef4444;
+  margin-left: 8px;
+}
+.ad-btn-danger:hover {
+  background: #ef4444;
+  color: white;
+}

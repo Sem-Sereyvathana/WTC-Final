@@ -4,16 +4,14 @@ import { supabase } from "../../../supabase_client";
 import { useAuth } from "../../hooks/useAuth";
 import "./product.css";
 
-// Pulls every order_item that belongs to one of the current user's
-// orders, along with the parent order (for date/status) and the
-// product (for name/image) it points to. "orders!inner" makes the
-// user_id filter below apply as a real join condition rather than
-// just filtering after the fact.
 export default function HistoryPage() {
   const { user, isLoggedIn, loading: authLoading } = useAuth();
   const [items, setItems] = useState([]);
+  const [credentials, setCredentials] = useState({}); 
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
+  const [viewing, setViewing] = useState(null); 
+  const [copiedField, setCopiedField] = useState(null);
 
   useEffect(() => {
     let cancelled = false;
@@ -21,6 +19,7 @@ export default function HistoryPage() {
     async function loadHistory() {
       if (!isLoggedIn || !user?.id) {
         setItems([]);
+        setCredentials({});
         setLoading(false);
         return;
       }
@@ -41,9 +40,30 @@ export default function HistoryPage() {
       if (historyError) {
         setError(historyError.message);
         setItems([]);
-      } else {
-        setItems(data ?? []);
+        setLoading(false);
+        return;
       }
+
+      setItems(data ?? []);
+
+      const itemIds = (data ?? []).map((item) => item.id);
+      if (itemIds.length > 0) {
+        const { data: credRows, error: credError } = await supabase
+          .from("account_credentials")
+          .select("assigned_order_item_id, email, password")
+          .in("assigned_order_item_id", itemIds);
+
+        if (!cancelled && !credError && credRows) {
+          const map = {};
+          for (const row of credRows) {
+            map[row.assigned_order_item_id] = { email: row.email, password: row.password };
+          }
+          setCredentials(map);
+        }
+      } else {
+        setCredentials({});
+      }
+
       setLoading(false);
     }
 
@@ -54,13 +74,20 @@ export default function HistoryPage() {
     };
   }, [isLoggedIn, user?.id, authLoading]);
 
+  function handleCopy(field, value) {
+    navigator.clipboard.writeText(value);
+    setCopiedField(field);
+    setTimeout(() => setCopiedField(null), 1500);
+  }
+
+  function closePanel() {
+    setViewing(null);
+    setCopiedField(null);
+  }
+
   return (
     <section className="pc-page">
-      <div className="pc-page-header">
-        <h1>Purchase History</h1>
-        <p>Everything you've bought, most recent first.</p>
-      </div>
-
+      
       {!authLoading && !isLoggedIn && (
         <p className="pc-state-text">
           <Link to="/login">Log in</Link> to see your purchase history.
@@ -83,6 +110,7 @@ export default function HistoryPage() {
             const productName = item.products?.name ?? "Product no longer available";
             const productImage = item.products?.image_url;
             const purchasedAt = item.orders?.created_at;
+            const credential = credentials[item.id];
 
             return (
               <div className="pc-history-row" key={item.id}>
@@ -97,9 +125,53 @@ export default function HistoryPage() {
                   </p>
                 </div>
                 <span className="pc-history-price">${item.price}</span>
+                {credential && (
+                  <button
+                    type="button"
+                    className="pc-view-btn"
+                    onClick={() =>
+                      setViewing({ name: productName, email: credential.email, password: credential.password })
+                    }
+                  >
+                    View
+                  </button>
+                )}
               </div>
             );
           })}
+        </div>
+      )}
+
+      {viewing && (
+        <div className="pc-modal-backdrop" onClick={closePanel}>
+          <div className="pc-modal" onClick={(e) => e.stopPropagation()}>
+            <h2 className="pc-modal-title">{viewing.name}</h2>
+            <p className="pc-modal-subtitle">Your login for this account</p>
+
+            <div className="pc-modal-field">
+              <label>Email</label>
+              <div className="pc-modal-value">
+                <span>{viewing.email}</span>
+                <button type="button" onClick={() => handleCopy("email", viewing.email)}>
+                  {copiedField === "email" ? "Copied!" : "Copy"}
+                </button>
+              </div>
+            </div>
+
+            <div className="pc-modal-field">
+              <label>Password</label>
+              <div className="pc-modal-value">
+                <span>{viewing.password}</span>
+                <button type="button" onClick={() => handleCopy("password", viewing.password)}>
+                  {copiedField === "password" ? "Copied!" : "Copy"}
+                </button>
+              </div>
+            </div>
+
+            <button type="button" className="pc-modal-close" onClick={closePanel}>
+              Close
+            </button>
+          </div>
         </div>
       )}
     </section>

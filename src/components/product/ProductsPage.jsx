@@ -3,13 +3,8 @@ import { supabase } from "../../../supabase_client";
 import ProductCard from "./ProductCard";
 import "./product.css";
 
-// Reading from a Supabase table called "products". Adjust TABLE_NAME
-// and the column names in mapRow() below to match your actual schema
-// (Table Editor in the Supabase dashboard shows the real column names).
 const TABLE_NAME = "products";
 
-// Maps one Supabase row -> the shape ProductCard expects.
-// Change the right-hand side (row.xxx) to match your real column names.
 function mapRow(row) {
   return {
     id: row.id,
@@ -55,10 +50,7 @@ export default function ProductsPage() {
 
   return (
     <section className="pc-page">
-      <div className="pc-page-header">
-        <h1>Our Products</h1>
-        <p>Browse all digital products — instant delivery, secure payment.</p>
-      </div>
+      
 
       {loading && <p className="pc-state-text">Loading products...</p>}
 

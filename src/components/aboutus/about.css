@@ -1,0 +1,210 @@
+.au-page {
+  padding: clamp(40px, 6vh, 64px) clamp(20px, 5vw, 60px) 100px;
+  max-width: 1100px;
+  margin: 0 auto;
+}
+
+.au-hero {
+  text-align: center;
+  padding-bottom: 64px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+  margin-bottom: 64px;
+}
+
+.au-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: rgba(56, 189, 248, 0.1);
+  border: 1px solid rgba(56, 189, 248, 0.35);
+  color: #7dd3fc;
+  font-size: 13px;
+  font-weight: 700;
+  padding: 6px 14px;
+  border-radius: 999px;
+  margin-bottom: 24px;
+}
+
+.au-title {
+  font-size: clamp(30px, 4.5vw, 46px);
+  font-weight: 800;
+  line-height: 1.15;
+  color: #f1f5f9;
+  margin: 0 0 18px;
+  max-width: 780px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.au-accent {
+  background: linear-gradient(90deg, #d6249f, #9333ea);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+.au-subtext {
+  font-size: 15px;
+  line-height: 1.65;
+  color: #94a3b8;
+  max-width: 620px;
+  margin: 0 auto 32px;
+}
+
+.au-hero-actions {
+  display: flex;
+  gap: 16px;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+.au-section {
+  margin-bottom: 72px;
+}
+
+.au-section-title {
+  font-size: clamp(24px, 3vw, 32px);
+  font-weight: 800;
+  color: #f1f5f9;
+  text-align: center;
+  margin: 0 0 8px;
+}
+
+.au-section-subtitle {
+  font-size: 14px;
+  color: #94a3b8;
+  text-align: center;
+  margin: 0 0 40px;
+}
+
+.au-feature-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 20px;
+}
+
+.au-feature-card {
+  background: #141b2e;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 16px;
+  padding: 28px 22px;
+  text-align: left;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.3);
+}
+
+.au-feature-icon {
+  width: 44px;
+  height: 44px;
+  border-radius: 12px;
+  background: rgba(37, 99, 235, 0.1);
+  color: #2563eb;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 16px;
+}
+
+.au-icon {
+  width: 22px;
+  height: 22px;
+}
+
+.au-feature-card h3 {
+  font-size: 16px;
+  font-weight: 700;
+  color: #f1f5f9;
+  margin: 0 0 8px;
+}
+
+.au-feature-card p {
+  font-size: 13px;
+  line-height: 1.6;
+  color: #94a3b8;
+  margin: 0;
+}
+
+.au-steps {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 24px;
+}
+
+.au-step {
+  text-align: center;
+  padding: 0 12px;
+}
+
+.au-step-num {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, #3b82f6, #4338ca);
+  color: #fff;
+  font-weight: 800;
+  font-size: 16px;
+  margin-bottom: 16px;
+}
+
+.au-step h3 {
+  font-size: 15px;
+  font-weight: 700;
+  color: #f1f5f9;
+  margin: 0 0 8px;
+}
+
+.au-step p {
+  font-size: 13px;
+  line-height: 1.6;
+  color: #94a3b8;
+  margin: 0;
+}
+
+.au-cta {
+  text-align: center;
+  background: #141b2e;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 20px;
+  padding: 48px 24px;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.3);
+}
+
+.au-cta h2 {
+  font-size: clamp(20px, 3vw, 26px);
+  font-weight: 800;
+  color: #f1f5f9;
+  margin: 0 0 8px;
+}
+
+.au-cta p {
+  font-size: 14px;
+  color: #94a3b8;
+  margin: 0 0 24px;
+}
+
+.au-cta-contacts {
+  display: flex;
+  gap: 28px;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+.au-cta-contacts a {
+  color: #2563eb;
+  text-decoration: none;
+  font-size: 14px;
+  font-weight: 700;
+}
+
+.au-cta-contacts a:hover {
+  color: #1d4ed8;
+}
+
+@media (max-width: 640px) {
+  .au-hero-actions {
+    flex-direction: column;
+    align-items: stretch;
+  }
+}

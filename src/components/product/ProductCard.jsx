@@ -1,30 +1,21 @@
 import { useEffect, useState } from "react";
+import { createPortal } from "react-dom";
 import { useNavigate } from "react-router-dom";
 import { supabase } from "../../../supabase_client";
 import { useAuth } from "../../hooks/useAuth";
 import { useFavorites } from "../../hooks/useFavorites";
 import "./product.css";
 
-// A single card, driven entirely by props. Nothing in here is
-// hardcoded to a specific product — reuse it for every item by
-// passing different data (see products.js + ProductsPage.jsx).
-//
-// The heart icon and "Buy Now" purchase-recording are built into this
-// template itself, so every card gets them automatically — nothing to
-// add per-product in products.js.
-
-// stockCount is the real number of units left. inStock is derived from
-// it automatically (0 = out of stock) unless you explicitly pass inStock.
 const LOW_STOCK_THRESHOLD = 5;
+
+function ModalPortal({ children }) {
+  return createPortal(children, document.body);
+}
 
 export default function ProductCard({ product }) {
   const { name, price, description, image, badge, stockCount } = product;
   const hasStockData = typeof stockCount === "number";
 
-  // Local copy of stock so the card can update itself instantly after
-  // a purchase, without waiting on the parent page to refetch. Stays
-  // in sync if the parent ever passes a fresh stockCount (e.g. after
-  // a manual reload of ProductsPage).
   const [localStock, setLocalStock] = useState(stockCount);
   useEffect(() => {
     setLocalStock(stockCount);
@@ -39,8 +30,21 @@ export default function ProductCard({ product }) {
   const { isFavorite, toggleFavorite } = useFavorites();
   const favorite = isFavorite(product.id);
 
-  const [buying, setBuying] = useState(false);
+  const [flowStep, setFlowStep] = useState(null);
+  const [checkingPayment, setCheckingPayment] = useState(false);
+  const [purchaseError, setPurchaseError] = useState(null);
+  const [result, setResult] = useState(null); // { email, password } | { noCredential: true } | null
+  const [copiedField, setCopiedField] = useState(null);
   const [justBought, setJustBought] = useState(false);
+
+  useEffect(() => {
+    if (!flowStep) return;
+    const prevOverflow = document.body.style.overflow;
+    document.body.style.overflow = "hidden";
+    return () => {
+      document.body.style.overflow = prevOverflow;
+    };
+  }, [flowStep]);
 
   function handleHeartClick() {
     if (!isLoggedIn) {
@@ -50,16 +54,41 @@ export default function ProductCard({ product }) {
     toggleFavorite(product.id);
   }
 
-  async function handleBuy() {
+  function handleBuyClick() {
     if (!isLoggedIn) {
       navigate("/login");
       return;
     }
-    if (!inStock || buying) return;
+    if (!inStock || flowStep) return;
+    setPurchaseError(null);
+    setResult(null);
+    setFlowStep("confirm");
+  }
 
-    setBuying(true);
+  function closeFlow() {
+    if (checkingPayment) return; 
+    setFlowStep(null);
+    setPurchaseError(null);
+    setCopiedField(null);
+    if (result) {
+      setJustBought(true);
+      setTimeout(() => setJustBought(false), 2000);
+    }
+    setResult(null);
+  }
 
-    // 1. Create the order (one order per "Buy Now" click, qty 1).
+  function handleCopy(field, value) {
+    navigator.clipboard.writeText(value);
+    setCopiedField(field);
+    setTimeout(() => setCopiedField(null), 1500);
+  }
+
+  async function completePurchase() {
+    setCheckingPayment(true);
+    setPurchaseError(null);
+
+    await new Promise((resolve) => setTimeout(resolve, 1400));
+
     const { data: order, error: orderError } = await supabase
       .from("orders")
       .insert({ user_id: user.id, total: price, status: "completed" })
@@ -67,28 +96,44 @@ export default function ProductCard({ product }) {
       .single();
 
     if (orderError) {
-      setBuying(false);
+      setCheckingPayment(false);
+      setPurchaseError("Couldn't record your order. Please try again.");
       console.error("Order failed:", orderError.message);
       return;
     }
 
-    // 2. Attach the line item to that order.
-    const { error: itemError } = await supabase.from("order_items").insert({
-      order_id: order.id,
-      product_id: product.id,
-      quantity: 1,
-      price,
-    });
+    const { data: orderItem, error: itemError } = await supabase
+      .from("order_items")
+      .insert({
+        order_id: order.id,
+        product_id: product.id,
+        quantity: 1,
+        price,
+      })
+      .select()
+      .single();
 
     if (itemError) {
-      setBuying(false);
+      setCheckingPayment(false);
+      setPurchaseError("Couldn't record your order. Please try again.");
       console.error("Order item failed:", itemError.message);
       return;
     }
 
-    // 3. Decrement stock via a Postgres function (see
-    //    decrement-stock-function.sql) instead of an UPDATE from the
-    //    client, so buyers can't just overwrite stock to any number.
+    const { error: credError } = await supabase.rpc("claim_account_credential", {
+      p_product_id: product.id,
+      p_order_item_id: orderItem.id,
+    });
+    if (credError && !credError.message.includes("No credentials available")) {
+      console.error("Credential claim failed:", credError.message);
+    }
+
+    const { data: credRow } = await supabase
+      .from("account_credentials")
+      .select("email, password")
+      .eq("assigned_order_item_id", orderItem.id)
+      .maybeSingle();
+
     if (hasStockData) {
       const { error: stockError } = await supabase.rpc("decrement_product_stock", {
         p_product_id: product.id,
@@ -102,9 +147,9 @@ export default function ProductCard({ product }) {
       }
     }
 
-    setBuying(false);
-    setJustBought(true);
-    setTimeout(() => setJustBought(false), 2000);
+    setCheckingPayment(false);
+    setResult(credRow ? { email: credRow.email, password: credRow.password } : { noCredential: true });
+    setFlowStep("result");
   }
 
   return (
@@ -123,9 +168,6 @@ export default function ProductCard({ product }) {
         </svg>
       </button>
 
-      {/* `image` can be any image/GIF URL (e.g. one you copied from
-          Google Images) or a local import from src/assets/products/ —
-          see products.js for both patterns. */}
       <img className="pc-icon" src={image} alt={name} />
 
       <h3 className="pc-name">{name}</h3>
@@ -143,10 +185,141 @@ export default function ProductCard({ product }) {
 
       <div className="pc-footer">
         <span className="pc-price">${price}</span>
-        <button className="pc-btn" disabled={!inStock || buying} onClick={handleBuy}>
-          {justBought ? "Purchased ✓" : buying ? "Processing..." : inStock ? "Buy Now" : "Out of Stock"}
+        <button className="pc-btn" disabled={!inStock || !!flowStep} onClick={handleBuyClick}>
+          {justBought ? "Purchased ✓" : inStock ? "Buy Now" : "Out of Stock"}
         </button>
       </div>
+
+      {flowStep === "confirm" && (
+        <ModalPortal>
+          <div className="pc-modal-backdrop" onClick={closeFlow}>
+            <div className="pc-modal" onClick={(e) => e.stopPropagation()}>
+              <h2 className="pc-modal-title">Confirm your purchase</h2>
+              <p className="pc-modal-subtitle">Double check before you pay.</p>
+
+              <div className="pc-confirm-product">
+                <img className="pc-confirm-img" src={image} alt={name} />
+                <div className="pc-confirm-info">
+                  <h3>{name}</h3>
+                  <p>{description}</p>
+                </div>
+              </div>
+
+              <div className="pc-modal-value pc-confirm-total">
+                <span>Total</span>
+                <span className="pc-confirm-price">${price}</span>
+              </div>
+
+              <div className="pc-modal-actions">
+                <button type="button" className="pc-modal-btn-secondary" onClick={closeFlow}>
+                  Cancel
+                </button>
+                <button
+                  type="button"
+                  className="pc-btn pc-modal-btn-primary"
+                  onClick={() => setFlowStep("payment")}
+                >
+                  Confirm
+                </button>
+              </div>
+            </div>
+          </div>
+        </ModalPortal>
+      )}
+
+      {flowStep === "payment" && (
+        <ModalPortal>
+          <div className="pc-modal-backdrop" onClick={closeFlow}>
+            <div className="pc-modal" onClick={(e) => e.stopPropagation()}>
+              <span className="pc-demo-badge">DEMO PAYMENT</span>
+              <h2 className="pc-modal-title">Scan to pay</h2>
+              <p className="pc-modal-subtitle">
+                Please pay within time limit!
+              </p>
+
+              <div className="pc-khqr-box">
+                <div className="pc-khqr-placeholder" />
+                <p className="pc-khqr-merchant">{name}</p>
+                <p className="pc-khqr-amount">${price}</p>
+              </div>
+
+              {purchaseError && <p className="pc-state-error pc-payment-error">{purchaseError}</p>}
+
+              <div className="pc-modal-actions">
+                <button
+                  type="button"
+                  className="pc-modal-btn-secondary"
+                  onClick={closeFlow}
+                  disabled={checkingPayment}
+                >
+                  Cancel
+                </button>
+                <button
+                  type="button"
+                  className="pc-btn pc-modal-btn-primary"
+                  onClick={completePurchase}
+                  disabled={checkingPayment}
+                >
+                  {checkingPayment ? (
+                    <>
+                      <span className="pc-spinner" /> Checking payment...
+                    </>
+                  ) : purchaseError ? (
+                    "Try Again"
+                  ) : (
+                    "Confirm Payment"
+                  )}
+                </button>
+              </div>
+            </div>
+          </div>
+        </ModalPortal>
+      )}
+
+      {flowStep === "result" && result && (
+        <ModalPortal>
+          <div className="pc-modal-backdrop" onClick={closeFlow}>
+            <div className="pc-modal" onClick={(e) => e.stopPropagation()}>
+              <h2 className="pc-modal-title">Payment successful 🎉</h2>
+
+              {result.noCredential ? (
+                <p className="pc-modal-subtitle">
+                  {name} is yours — no login is needed for this one, or the credential pool is
+                  empty right now. Check your History page later if that changes.
+                </p>
+              ) : (
+                <>
+                  <p className="pc-modal-subtitle">Here's your login for {name}.</p>
+
+                  <div className="pc-modal-field">
+                    <label>Email</label>
+                    <div className="pc-modal-value">
+                      <span>{result.email}</span>
+                      <button type="button" onClick={() => handleCopy("email", result.email)}>
+                        {copiedField === "email" ? "Copied!" : "Copy"}
+                      </button>
+                    </div>
+                  </div>
+
+                  <div className="pc-modal-field">
+                    <label>Password</label>
+                    <div className="pc-modal-value">
+                      <span>{result.password}</span>
+                      <button type="button" onClick={() => handleCopy("password", result.password)}>
+                        {copiedField === "password" ? "Copied!" : "Copy"}
+                      </button>
+                    </div>
+                  </div>
+                </>
+              )}
+
+              <button type="button" className="pc-modal-close" onClick={closeFlow}>
+                Close
+              </button>
+            </div>
+          </div>
+        </ModalPortal>
+      )}
     </div>
   );
 }

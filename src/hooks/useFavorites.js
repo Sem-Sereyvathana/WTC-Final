@@ -2,13 +2,6 @@ import { useCallback, useEffect, useState } from "react";
 import { supabase } from "../../supabase_client";
 import { useAuth } from "./useAuth";
 
-// Tracks which product ids the current user has favorited, and lets
-// any component toggle a favorite on/off. Backed by a "favorites"
-// table (user_id, product_id) in Supabase — see favorites-purchases.sql
-// in the project root for the table + RLS setup.
-//
-// Any component can call this hook on its own (e.g. ProductCard does,
-// so the heart "just works" on every card with zero per-product setup).
 export function useFavorites() {
   const { user, isLoggedIn } = useAuth();
   const [favoriteIds, setFavoriteIds] = useState(new Set());
@@ -54,7 +47,6 @@ export function useFavorites() {
 
       const alreadyFavorite = favoriteIds.has(productId);
 
-      // Optimistic UI update — flip it instantly, revert on failure.
       setFavoriteIds((prev) => {
         const next = new Set(prev);
         if (alreadyFavorite) next.delete(productId);

@@ -1,5 +1,4 @@
-import { Link } from "react-router-dom";
-import "./layout.css";
+import "./Layout.css";
 
 export default function Footer() {
   return (
@@ -19,15 +18,15 @@ export default function Footer() {
         </div>
 
         <div className="rs-footer-links">
-          <div className="rs-footer-col">
-            <h4>Store</h4>
-            <Link to="/">Home</Link>
-            <Link to="/products">Products</Link>
-          </div>
-          <div className="rs-footer-col">
-            <h4>Account</h4>
-            <Link to="/login">Login</Link>
-            <Link to="/register">Sign Up</Link>
+          <div className="rs-footer-col rs-footer-contact">
+            
+            <a href="https://facebook.com/yourpage" target="_blank" rel="noreferrer">
+              Facebook: ITE Store
+            </a>
+            <a href="https://t.me/yourusername" target="_blank" rel="noreferrer">
+              Telegram: @ITE_STORE
+            </a>
+            <a href="mailto:admin@itestore.com">Email: itestore@gmail.com</a>
           </div>
         </div>
       </div>
